@@ -27,6 +27,16 @@ module.exports = function (app) {
         default: '',
         type: 'string'
       },
+      receive: {
+        title: 'Enable receiving incoming messages',
+        type: 'boolean'
+      },
+      port: {
+        description: 'To relay incoming nmea0183 messages, set the port to send it to on localhost',
+        title: 'UDP port number',
+        default: 10110,
+        type: 'number'
+      },
       receiveNMEA: {
         type: 'object',
         title: 'Filter the following NMEA0183 sentences out before passing to SignalK',
@@ -414,7 +424,9 @@ module.exports = function (app) {
         if (options.receiveNMEA[nmeaType] == false) {
           // app.debug('NMEA0183 receive ' + nmeaType + " " + options.receiveNMEA[nmeaType] + " " + msgString)
           // app.emit('nmea0183out', msgString)
-      		// serverA.send(msg, 0, msg.length, 10110, myIP, function () {})
+      		if (options.receive == 'true') {
+            serverA.send(msg, 0, msg.length, options.port, '127.0.0.1', function () {})
+          }
         } 
       }
     }
