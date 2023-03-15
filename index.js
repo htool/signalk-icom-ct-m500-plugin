@@ -173,7 +173,7 @@ module.exports = function (app) {
 
 
     async function sendNMEA0183 (string) {
-      if (!string.match(/aN/)) {
+      if (radio.status == 'online' && !string.match(/aN/)) {
         let length = string.length + 2   // 0d0a
         let header = [73,99,111,109,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,length,0,0,0,1,length,2]
         let msg_header = Buffer.from(header)
