@@ -1,6 +1,6 @@
 {
   "name": "signalk-icom-ct-m500-plugin",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Get active channel information and change channel over wlan.",
   "main": "index.js",
   "scripts": {
